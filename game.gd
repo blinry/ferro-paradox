@@ -54,7 +54,7 @@ func levels():
 		"curve",
 		"fork",
 		"sacrifice",
-		"split_up",
+		#"split_up",
 		"rescue",
 	]
 	var levels = []

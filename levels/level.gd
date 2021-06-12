@@ -97,6 +97,7 @@ func move(dir):
 		if objects.get_cellv(p+dir) != GOAL:
 			objects.set_cellv(p+dir, t)
 		else:
+			objects.set_cellv(p+dir, EMPTY)
 			$Eat.pitch_scale = rand_range(0.8,1.2)
 			$Eat.play()
 			if t == PLAYER:
