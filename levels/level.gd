@@ -1,7 +1,6 @@
 extends Node2D
 
 onready var objects = $Objects
-onready var bg = $Background
 
 var EMPTY = -1
 
@@ -9,8 +8,7 @@ var PLAYER = 0
 var SLEEPY = 1
 var BLOCK = 2
 var WALL = 3
-
-var GOAL = 0
+var GOAL = 4
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,15 +41,7 @@ func _input(event):
 	
 	if dir != Vector2(0, 0):
 		move(dir)
-	
-	# Put stuff through the goal
-	for p in objects.get_used_cells():
-		if is_piece(p):
-			for goal in bg.get_used_cells_by_id(GOAL):
-				if goal == p:
-					if objects.get_cellv(p) == PLAYER:
-						wake_up_next()					
-					objects.set_cellv(p, EMPTY)
+
 func move(dir):
 	var player = objects.get_used_cells_by_id(PLAYER)[0]
 	var to_move = []
@@ -72,7 +62,10 @@ func move(dir):
 	for p in to_move:
 		var t = objects.get_cellv(p)
 		objects.set_cellv(p, EMPTY)
-		objects.set_cellv(p+dir, t)
+		if objects.get_cellv(p+dir) != GOAL:
+			objects.set_cellv(p+dir, t)
+		elif t == PLAYER:
+			wake_up_next()
 		moved.push_back(p+dir)
 
 
@@ -96,10 +89,8 @@ func find_moves(pos, dir, to_move):
 		find_moves(right, dir, to_move)
 
 func can_move(pos, dir):
-	print(pos)
-	print(dir)
 	var next = objects.get_cellv(pos+dir)
-	if next == EMPTY:
+	if next == EMPTY or next == GOAL:
 		return true
 	elif next == WALL:
 		return false
