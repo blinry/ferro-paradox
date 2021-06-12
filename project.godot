@@ -10,7 +10,6 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
@@ -24,8 +23,10 @@ game="*res://game.gd"
 
 [display]
 
-window/size/width=1920
-window/size/height=1080
+window/size/width=320
+window/size/height=180
+window/size/test_width=1920
+window/size/test_height=1080
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
