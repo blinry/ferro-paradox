@@ -26,6 +26,8 @@ func wake_up_next():
 		var players = objects.get_used_cells_by_id(PLAYER)
 		if players.size() > 0:
 			objects.set_cellv(players[0], SLEEPY)
+			$Switch.pitch_scale = rand_range(0.7,1.3)
+			$Switch.play()
 		objects.set_cellv(sleepy[0], PLAYER)
 
 func _input(event):
@@ -91,16 +93,19 @@ func move(dir):
 		objects.set_cellv(p, EMPTY)
 		if objects.get_cellv(p+dir) != GOAL:
 			objects.set_cellv(p+dir, t)
-		elif t == PLAYER:
-			wake_up_next()
+		else:
+			$Eat.pitch_scale = rand_range(0.8,1.2)
+			$Eat.play()
+			if t == PLAYER:
+				wake_up_next()
 		moved.push_back(p+dir)
 
 	if moved.size() > 0:
 		undo_stack.push_back(old_state)
 		if won():
-			print("wonnn")
+			$Win.play()
+			yield(get_tree().create_timer(1), "timeout")
 			game.next_level()
-	
 	
 	var all = []
 	all += objects.get_used_cells_by_id(PLAYER)
@@ -126,9 +131,10 @@ func move(dir):
 	
 	if object_count < prev_object_count and prev_object_count > 0:
 		#$Click.position = objects.map_to_world(pos)
+		$Click.pitch_scale = rand_range(0.8,1.2)
 		$Click.play()
 	elif object_count > prev_object_count and object_count > 0 and prev_object_count != -1:
-		$Click.pitch_scale = -1
+		$Click.pitch_scale = rand_range(-0.8,-1.2)
 		$Click.play()
 	
 	prev_object_count = object_count
