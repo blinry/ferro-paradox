@@ -44,14 +44,18 @@ func load_level(n):
 
 func levels():
 	var names = [
-		"first_pull",
+		"title",
+		"katamari",
+		"slide_off",
 		"corners",
-		"door",
+		"assembly",
 		"rearrange",
-		"curve",		
+		"doors",
+		"curve",
 		"fork",
-		"rescue",
+		"sacrifice",
 		"split_up",
+		"rescue",
 	]
 	var levels = []
 	for n in names:
