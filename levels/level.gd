@@ -43,7 +43,11 @@ func _input(event):
 		move(dir)
 
 func move(dir):
-	var player = objects.get_used_cells_by_id(PLAYER)[0]
+	var players = objects.get_used_cells_by_id(PLAYER)
+	if players.size() == 0:
+		return
+	
+	var player = players[0]
 	var to_move = []
 	find_moves(player, dir, to_move)
 
