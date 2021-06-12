@@ -1,5 +1,7 @@
 extends Node2D
 
+export var title = "Untitled"
+
 onready var objects = $Objects
 
 var EMPTY = -1
@@ -14,7 +16,8 @@ var undo_stack = []
 var prev_object_count = -1
 
 func _ready():
-	$Meta/Name.text = get_tree().current_scene.filename.split("/")[-1].split(".")[0]
+	#$Meta/Name.text = get_tree().current_scene.filename.split("/")[-1].split(".")[0]
+	$Meta/Name.text = title
 	var players = objects.get_used_cells_by_id(PLAYER)
 	for p in players.slice(1, -1):
 		objects.set_cellv(p, SLEEPY)
