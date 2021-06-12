@@ -45,6 +45,7 @@ func load_level(n):
 func levels():
 	var names = [
 		"title",
+		"box",
 		"katamari",
 		"slide_off",
 		"corners",
