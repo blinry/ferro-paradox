@@ -1,18 +1,36 @@
 extends Node2D
 
 onready var objects = $Objects
+onready var bg = $Background
 
 var EMPTY = -1
+
 var PLAYER = 0
-var BLOCK = 1
-var WALL = 2
+var SLEEPY = 1
+var BLOCK = 2
+var WALL = 3
+
+var GOAL = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	var players = objects.get_used_cells_by_id(PLAYER)
+	for p in players.slice(1, -1):
+		objects.set_cellv(p, SLEEPY)
+		
+func wake_up_next():
+	# FIXME: Doesn't work for more than two characters.
+	var sleepy = objects.get_used_cells_by_id(SLEEPY)
+	if sleepy.size() > 0:
+		var players = objects.get_used_cells_by_id(PLAYER)
+		if players.size() > 0:
+			objects.set_cellv(players[0], SLEEPY)
+		objects.set_cellv(sleepy[0], PLAYER)
 
 func _input(event):
+	if event.is_action_pressed("switch"):	
+		wake_up_next()	
+	
 	var dir = Vector2(0, 0)
 	if event.is_action_pressed("left"):
 		dir = Vector2(-1, 0)
@@ -25,7 +43,15 @@ func _input(event):
 	
 	if dir != Vector2(0, 0):
 		move(dir)
-
+	
+	# Put stuff through the goal
+	for p in objects.get_used_cells():
+		if is_piece(p):
+			for goal in bg.get_used_cells_by_id(GOAL):
+				if goal == p:
+					if objects.get_cellv(p) == PLAYER:
+						wake_up_next()					
+					objects.set_cellv(p, EMPTY)
 func move(dir):
 	var player = objects.get_used_cells_by_id(PLAYER)[0]
 	var to_move = []
@@ -82,7 +108,7 @@ func can_move(pos, dir):
 
 func is_piece(pos):
 	var id = objects.get_cellv(pos)
-	return id == 1
+	return id >= 0 and id <= 2
 
 func connected(p1, p2):
 	return true

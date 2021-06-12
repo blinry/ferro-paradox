@@ -1,4 +1,4 @@
-name = "untitled-game"
+name = "magnobots"
 
 all: linux macos windows web
 
