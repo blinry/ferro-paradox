@@ -51,9 +51,9 @@ rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 3 )
 custom_colors/default_color = Color( 0.290196, 0.290196, 0.290196, 1 )
 bbcode_enabled = true
-bbcode_text = "[center]made in 48 hours for GMTK Jam 2021
+bbcode_text = "[center]made in 48 hours for GMTK Game Jam 2021
 by blinry and winniehell"
-text = "made in 48 hours for GMTK Jam 2021
+text = "made in 48 hours for GMTK Game Jam 2021
 by blinry and winniehell"
 __meta__ = {
 "_edit_use_anchors_": false
