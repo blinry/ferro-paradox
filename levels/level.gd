@@ -51,6 +51,7 @@ func _input(event):
 			objects = undo_stack[0].duplicate()
 			add_child(objects)
 			unoops()
+			$Eat.play()
 		return
 
 	
@@ -100,11 +101,17 @@ func move(dir):
 			objects.set_cellv(p+dir, EMPTY)
 			$Eat.pitch_scale = rand_range(0.8,1.2)
 			$Eat.play()
+			var e = preload("res://explosion.tscn").instance()
+			e.position = objects.map_to_world(p+dir)+Vector2(8,8)
+			add_child(e)
+			print(e.position)
 			if t == PLAYER:
 				wake_up_next()
 		moved.push_back(p+dir)
 
 	if moved.size() > 0:
+		$Step.pitch_scale = rand_range(0.8,1.2)
+		$Step.play()
 		undo_stack.push_back(old_state)
 		if won():
 			#$Burp.play()
@@ -134,13 +141,14 @@ func move(dir):
 #			$Drop.play()
 		object_count += 1
 	
-	if object_count < prev_object_count and prev_object_count > 0:
+	if object_count < prev_object_count and prev_object_count > 0 and object_count > 0:
 		#$Click.position = objects.map_to_world(pos)
 		$Click.pitch_scale = rand_range(0.8,1.2)
 		$Click.play()
 	elif object_count > prev_object_count and object_count > 0 and prev_object_count != -1:
-		$Click.pitch_scale = -1
-		$Click.play()
+		#$Click.pitch_scale = -1
+		#$Click.play()
+		pass
 	
 	prev_object_count = object_count
 

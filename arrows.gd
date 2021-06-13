@@ -17,7 +17,7 @@ func _input(event):
 	if not arrows_started and (event.is_action_pressed("up") or event.is_action_pressed("down") or event.is_action_pressed("left") or event.is_action_pressed("right")):
 		arrows_started = true
 		var t = Tween.new()
-		t.interpolate_property(self, "modulate", Color(1,1,1,1), Color(1,1,1,0), 0.5, Tween.TRANS_CIRC, Tween.EASE_OUT)
+		t.interpolate_property(self, "modulate", Color(1,1,1,1), Color(1,1,1,0), 0.2, Tween.TRANS_CIRC, Tween.EASE_OUT)
 		add_child(t)
 		t.start()
 		yield(t, "tween_completed")

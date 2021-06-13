@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/hyobodo-chukae.ogg-d61abdec502275e69b9ee0cd0aec83e1.oggstr"
+
+[deps]
+
+source_file="res://hyobodo-chukae.ogg"
+dest_files=[ "res://.import/hyobodo-chukae.ogg-d61abdec502275e69b9ee0cd0aec83e1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
