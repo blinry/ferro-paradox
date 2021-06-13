@@ -1,4 +1,4 @@
-name = "magnobots"
+name = "ferro-paradox"
 
 all: linux macos windows web
 

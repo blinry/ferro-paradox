@@ -104,7 +104,6 @@ func move(dir):
 			var e = preload("res://explosion.tscn").instance()
 			e.position = objects.map_to_world(p+dir)+Vector2(8,8)
 			add_child(e)
-			print(e.position)
 			if t == PLAYER:
 				wake_up_next()
 		moved.push_back(p+dir)

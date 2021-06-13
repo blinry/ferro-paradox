@@ -47,6 +47,7 @@ func levels():
 		"title",
 		"box",
 		"katamari",
+		"first_slide_off",
 		"slide_off",
 		"corners",
 		"rearrange",
@@ -57,6 +58,7 @@ func levels():
 		"sacrifice",
 		#"split_up",
 		"rescue",
+		"thanks"
 	]
 	var levels = []
 	for n in names:
